@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign In</h5>
+          <form class="form-signin" [formGroup]="loginForm" (submit)="login()">
+            <div class="form-label-group">
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email">
+              <label for="inputEmail">Email address
+                <span class="error" *ngIf="form.email.invalid && form.email.dirty">
+                  <span *ngIf="form.email.errors.required">
+                    email required
+                  </span>
+                  <span *ngIf="form.email.errors.email">
+                    invalid email
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <div class="form-label-group">
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" formControlName="password">
+              <label for="inputPassword">Password
+                <span class="error" *ngIf="form.password.invalid && form.password.dirty">
+                  password required
+                </span>
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

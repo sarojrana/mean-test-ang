@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="card m-3 p-2 text-center">
+      <h3>
+        USER EDIT
+      </h3>
+    </div>
+    <div class="card p-4">
+      <a class="m-2" [routerLink]="['/user-list']"> Goto User List</a>
+      <form [formGroup]="userForm" (submit)="editUser()">
+        <div class="form-group">
+          <label for="file">Upload Image</label>
+          <input type="file" class="form-control-file" (change)="handleFile($event)">
+        </div>
+        <div class="form-group">
+          <label for="name">Full Name
+            <span class="error" *ngIf="form.full_name.invalid && form.full_name.dirty">
+              <span *ngIf="form.full_name.errors.required">
+                full name required
+              </span>
+              <span *ngIf="form.full_name.errors.pattern">
+                full name should contain alphabets only
+              </span>
+            </span>
+          </label>
+          <input type="text" class="form-control" id="name" placeholder="Full Name" formControlName="full_name">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender
+            <span class="error" *ngIf="form.gender.invalid && form.gender.dirty">
+              gender required
+            </span>
+          </label>
+          <select class="form-control" id="gender" formControlName="gender">
+            <option value="">--select--</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="designation">Designation</label>
+          <input type="text" class="form-control" id="designation" placeholder="Designation" formControlName="designation">
+        </div>
+        <div class="form-group">
+          <label for="experiences">Experiences</label>
+          <div formArrayName="experiences">
+            <div *ngFor="let experience of experiences.controls; let i=index">
+              <textarea class="form-control" id="experiences" rows="1" [formControlName]="i"></textarea>
+              <span class="ml-1" (click)="addExperience()"><i class="fas fa-plus"></i></span>
+              <span class="ml-1" (click)="removeExperience(i)"><i class="fas fa-minus"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>User Status
+            <span *ngIf="form.status.invalid && form.status.dirty">
+              Status required
+            </span>
+          </label>
+          <div class="form-row">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" formControlName="status" id="active" value="ACTIVE">
+              <label class="form-check-label" for="active">ACTIVE</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" formControlName="status" id="blocked" value="BLOCKED">
+              <label class="form-check-label" for="blocked">BLOCKED</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
