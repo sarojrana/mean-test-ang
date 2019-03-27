@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { config } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  apiUrl = 'http://localhost:8000/users';
+  apiUrl = `${config.serverApiUrl}users`;
 
   constructor(
     private http: HttpClient
